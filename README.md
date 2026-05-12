@@ -1,4 +1,4 @@
-# LLaVA-Gemma-2B to GGUF Converter 🚀
+# LLaVA-Gemma-2B GGUF Converter 🚀
 
 A streamlined, memory-safe toolkit for extracting and converting the **Intel/llava-gemma-2b** Vision-Language Model (VLM) into the **GGUF** format for local inference with `llama.cpp`. 
 
@@ -49,6 +49,14 @@ Because VLMs consist of both a base text model and a vision encoder/projector, t
 
 Once you have downloaded both files (`llava-gemma-2b-f16.gguf` and `mmproj-model-f16.gguf`), you can run them locally using `llama-cli` or `llama-server`.
 
+**llama.cpp SetUp**
+```bash
+git clone https://github.com/ggml-org/llama.cpp.git
+cd llama.cpp
+rm -rf build # Previous Build Cleanup
+cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=CUDA Compute Capability # Configure for NVIDIA CUDA Toolkit 11.8, Pascal/Turing Architectures
+cmake --build build --config Release -j $(nproc)
+```
 **Example CLI Command:**
 ```bash
 ./llama-cli -m path/to/llava-gemma-2b-f16.gguf \
